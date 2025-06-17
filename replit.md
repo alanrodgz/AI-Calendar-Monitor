@@ -83,6 +83,8 @@ The deployment uses Replit's autoscale deployment target with build and run comm
 - ✓ Updated all import paths to use Next.js @ alias convention
 - ✓ Configured TypeScript, ESLint, and Tailwind CSS for Next.js
 - ✓ Maintained OpenAI GPT-3.5-turbo integration for AI functionality
+- ✓ Fixed hydration errors by adding client-side rendering checks
+- ✓ Improved sign-out UX to redirect back to landing page
 
 ## Changelog
 

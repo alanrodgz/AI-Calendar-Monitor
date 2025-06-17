@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { signOutUser } from "@/lib/firebase";
 import { useAuth } from "@/hooks/useAuth";
+import { useToast } from "@/hooks/use-toast";
 import GoalCard from "./goal-card";
 import AddGoalDialog from "./add-goal-dialog";
 import type { Goal, AiSuggestion } from "@/shared/schema";
@@ -12,9 +13,25 @@ import type { Goal, AiSuggestion } from "@/shared/schema";
 export default function Sidebar() {
   const [isAddGoalOpen, setIsAddGoalOpen] = useState(false);
   const { user } = useAuth();
+  const { toast } = useToast();
 
-  const handleSignOut = () => {
-    signOutUser();
+  const handleSignOut = async () => {
+    try {
+      await signOutUser();
+      toast({
+        title: "Signed out successfully",
+        description: "Redirecting to landing page...",
+      });
+      // Force a page refresh to return to landing page
+      window.location.href = '/';
+    } catch (error) {
+      console.error('Sign out error:', error);
+      toast({
+        title: "Sign out failed",
+        description: "There was an error signing out. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   const { data: goals = [], isLoading: goalsLoading } = useQuery<Goal[]>({
@@ -39,12 +56,14 @@ export default function Sidebar() {
             <h1 className="text-xl font-semibold text-gray-900">Motion AI</h1>
           </div>
           <Button
-            variant="ghost"
+            variant="outline"
             size="sm"
             onClick={handleSignOut}
-            className="p-2 h-8 w-8"
+            className="text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200 hover:border-red-300"
+            title="Sign out and return to home"
           >
-            <LogOut className="w-4 h-4" />
+            <LogOut className="w-4 h-4 mr-1" />
+            <span className="text-xs">Sign Out</span>
           </Button>
         </div>
         

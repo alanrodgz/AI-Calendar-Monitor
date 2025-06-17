@@ -7,6 +7,9 @@ export function useAuth() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Prevent hydration mismatch by only setting up auth listener on client
+    if (typeof window === 'undefined') return;
+    
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
       setLoading(false);
