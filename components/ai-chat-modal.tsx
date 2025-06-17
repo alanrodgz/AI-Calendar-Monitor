@@ -12,7 +12,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Brain, X, Send } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
-import type { Goal, Task } from "@shared/schema";
+import type { Goal, Task } from "@/shared/schema";
 
 interface Message {
   id: string;

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Sparkles, Calendar } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
-import type { Goal } from "@shared/schema";
+import type { Goal } from "@/shared/schema";
 
 interface GoalCardProps {
   goal: Goal;

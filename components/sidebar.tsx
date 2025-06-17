@@ -7,7 +7,7 @@ import { signOutUser } from "@/lib/firebase";
 import { useAuth } from "@/hooks/useAuth";
 import GoalCard from "./goal-card";
 import AddGoalDialog from "./add-goal-dialog";
-import type { Goal, AiSuggestion } from "@shared/schema";
+import type { Goal, AiSuggestion } from "@/shared/schema";
 
 export default function Sidebar() {
   const [isAddGoalOpen, setIsAddGoalOpen] = useState(false);

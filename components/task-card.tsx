@@ -1,6 +1,6 @@
 import { GripVertical, Brain, Users, Code, BookOpen } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import type { Task } from "@shared/schema";
+import type { Task } from "@/shared/schema";
 
 interface TaskCardProps {
   task: Task;

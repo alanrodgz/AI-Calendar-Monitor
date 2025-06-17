@@ -2,7 +2,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { DragDropContext, Droppable, Draggable, DropResult } from "react-beautiful-dnd";
 import TaskCard from "./task-card";
 import { apiRequest } from "@/lib/queryClient";
-import type { Task } from "@shared/schema";
+import type { Task } from "@/shared/schema";
 
 interface CalendarGridProps {
   currentDate: Date;
