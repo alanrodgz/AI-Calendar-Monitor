@@ -1462,6 +1462,11 @@ body {
   border-color: hsl(var(--primary));
 }
 
+.border-red-200 {
+  --tw-border-opacity: 1;
+  border-color: rgb(254 202 202 / var(--tw-border-opacity, 1));
+}
+
 .border-red-500 {
   --tw-border-opacity: 1;
   border-color: rgb(239 68 68 / var(--tw-border-opacity, 1));
@@ -2030,6 +2035,11 @@ body {
   color: rgb(239 68 68 / var(--tw-text-opacity, 1));
 }
 
+.text-red-600 {
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity, 1));
+}
+
 .text-secondary-foreground {
   color: hsl(var(--secondary-foreground));
 }
@@ -2486,6 +2496,11 @@ body {
   z-index: 20;
 }
 
+.hover\:border-red-300:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(252 165 165 / var(--tw-border-opacity, 1));
+}
+
 .hover\:bg-accent:hover {
   background-color: hsl(var(--accent));
 }
@@ -2533,6 +2548,11 @@ body {
   background-color: hsl(var(--primary) / .9);
 }
 
+.hover\:bg-red-50:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 242 242 / var(--tw-bg-opacity, 1));
+}
+
 .hover\:bg-secondary:hover {
   background-color: hsl(var(--secondary));
 }
@@ -2574,6 +2594,11 @@ body {
 
 .hover\:text-primary-foreground:hover {
   color: hsl(var(--primary-foreground));
+}
+
+.hover\:text-red-700:hover {
+  --tw-text-opacity: 1;
+  color: rgb(185 28 28 / var(--tw-text-opacity, 1));
 }
 
 .hover\:underline:hover {
