@@ -184,8 +184,13 @@ export class MemStorage implements IStorage {
   async createGoal(insertGoal: InsertGoal): Promise<Goal> {
     const id = this.currentGoalId++;
     const goal: Goal = {
-      ...insertGoal,
       id,
+      title: insertGoal.title,
+      description: insertGoal.description,
+      priority: insertGoal.priority || "medium",
+      progress: insertGoal.progress || 0,
+      dueDate: insertGoal.dueDate || null,
+      isCompleted: insertGoal.isCompleted || false,
       createdAt: new Date(),
     };
     this.goals.set(id, goal);
@@ -228,8 +233,17 @@ export class MemStorage implements IStorage {
   async createTask(insertTask: InsertTask): Promise<Task> {
     const id = this.currentTaskId++;
     const task: Task = {
-      ...insertTask,
       id,
+      title: insertTask.title,
+      description: insertTask.description || null,
+      goalId: insertTask.goalId || null,
+      startTime: insertTask.startTime,
+      endTime: insertTask.endTime,
+      duration: insertTask.duration,
+      priority: insertTask.priority || "medium",
+      isCompleted: insertTask.isCompleted || false,
+      isAiGenerated: insertTask.isAiGenerated || false,
+      color: insertTask.color || "#6366F1",
       createdAt: new Date(),
     };
     this.tasks.set(id, task);
@@ -257,8 +271,10 @@ export class MemStorage implements IStorage {
   async createAiSuggestion(insertSuggestion: InsertAiSuggestion): Promise<AiSuggestion> {
     const id = this.currentSuggestionId++;
     const suggestion: AiSuggestion = {
-      ...insertSuggestion,
       id,
+      content: insertSuggestion.content,
+      type: insertSuggestion.type,
+      isRead: insertSuggestion.isRead || false,
       createdAt: new Date(),
     };
     this.aiSuggestions.set(id, suggestion);

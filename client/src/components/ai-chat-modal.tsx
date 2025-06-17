@@ -114,7 +114,7 @@ export default function AiChatModal({ isOpen, onClose }: AiChatModalProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md h-[600px] flex flex-col p-0">
+      <DialogContent className="sm:max-w-md h-[600px] flex flex-col p-0" aria-describedby="ai-chat-description">
         {/* Chat Header */}
         <DialogHeader className="p-6 pb-0">
           <div className="flex items-center justify-between">
@@ -124,7 +124,7 @@ export default function AiChatModal({ isOpen, onClose }: AiChatModalProps) {
               </div>
               <div>
                 <DialogTitle>AI Assistant</DialogTitle>
-                <p className="text-sm text-gray-600">Ready to help optimize your schedule</p>
+                <p id="ai-chat-description" className="text-sm text-gray-600">Ready to help optimize your schedule</p>
               </div>
             </div>
             <Button

@@ -3,7 +3,7 @@ import { Goal, Task, InsertTask } from "@shared/schema";
 
 // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
 const openai = new OpenAI({ 
-  apiKey: process.env.OPENAI_API_KEY || process.env.OPENAI_API_KEY_ENV_VAR || "default_key" 
+  apiKey: process.env.OPENAI_API_KEY
 });
 
 export interface ScheduleOptimizationRequest {
@@ -163,6 +163,10 @@ Note: Do not include startTime and endTime - these will be scheduled separately.
 
 export async function getChatResponse(message: string, context: { goals: Goal[]; tasks: Task[] }): Promise<string> {
   try {
+    if (!process.env.OPENAI_API_KEY) {
+      throw new Error("OpenAI API key not configured");
+    }
+
     const contextString = `
 Current Goals:
 ${context.goals.map(goal => `- ${goal.title}: ${goal.description} (${goal.progress}% complete)`).join('\n')}
@@ -171,6 +175,7 @@ Today's Tasks:
 ${context.tasks.map(task => `- ${task.title}: ${new Date(task.startTime).toLocaleTimeString()} - ${new Date(task.endTime).toLocaleTimeString()}`).join('\n')}
 `;
 
+    console.log('Making OpenAI API request for chat...');
     const response = await openai.chat.completions.create({
       model: "gpt-4o",
       messages: [
@@ -189,9 +194,16 @@ ${contextString}`
       max_tokens: 300,
     });
 
+    console.log('OpenAI API response received successfully');
     return response.choices[0].message.content || "I'm sorry, I couldn't process your request right now.";
   } catch (error) {
-    console.error('OpenAI API error:', error);
-    return "I'm experiencing some technical difficulties. Please try again later.";
+    console.error('OpenAI API error details:', error);
+    if (error.code === 'invalid_api_key') {
+      return "The OpenAI API key appears to be invalid. Please check your API key configuration.";
+    }
+    if (error.code === 'insufficient_quota') {
+      return "The OpenAI API quota has been exceeded. Please check your OpenAI account billing.";
+    }
+    return `I'm experiencing technical difficulties: ${error.message}. Please try again later.`;
   }
 }
