@@ -131,7 +131,7 @@ export default function CalendarGrid({ currentDate, view, onLoading }: CalendarG
             </div>
 
             {/* Time Grid */}
-            <Droppable droppableId="calendar-grid">
+            <Droppable droppableId="calendar-grid" isDropDisabled={false}>
               {(provided) => (
                 <div
                   ref={provided.innerRef}

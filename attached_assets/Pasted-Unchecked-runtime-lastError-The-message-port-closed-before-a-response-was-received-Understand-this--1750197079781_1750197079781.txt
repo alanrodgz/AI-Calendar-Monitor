@@ -1,0 +1,136 @@
+Unchecked runtime.lastError: The message port closed before a response was received.Understand this error
+react-dom-client.development.js:25022 Download the React DevTools for a better development experience: https://react.dev/link/react-devtools
+ai-calendar-c4942.firebaseapp.com/__/auth/iframe?apiKey=AIzaSyDo-mzP6rvAIPZ0vR3dWW1aD0VszVwUiWo&appName=%5BDEFAULT%5D&v=10.14.1&eid=p&usegapi=1&jsh=m%3B%2F_%2Fscs%2Fabc-static%2F_%2Fjs%2Fk%3Dgapi.lb.en.nJpyt-fjzo8.O%2Fd%3D1%2Frs%3DAHpOoo9fTqXSCmwMDsu9FH68l5KSqr6MBg%2Fm%3D__features__#id=I0_1750197014076&_gfid=I0_1750197014076&parent=http%3A%2F%2Flocalhost%3A3000&pfname=&rpctoken=16428684:1 Unchecked runtime.lastError: The message port closed before a response was received.Understand this error
+popup.ts:50 Cross-Origin-Opener-Policy policy would block the window.close call.
+close @ popup.ts:50Understand this error
+popup.ts:50 Cross-Origin-Opener-Policy policy would block the window.close call.
+close @ popup.ts:50Understand this error
+2intercept-console-error.ts:40 react-beautiful-dndA setup problem was encountered.> Invariant failed: isDropDisabled must be a boolean👷‍ This is a development only message. It will be removed in production builds.
+error @ intercept-console-error.ts:40Understand this error
+:3000/api/ai-suggestions:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+:3000/api/goals:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+:3000/api/tasks:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+:3000/api/ai-suggestions:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+:3000/api/goals:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+:3000/api/tasks:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+:3000/api/ai-suggestions:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+:3000/api/goals:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+:3000/api/tasks:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+:3000/api/ai-suggestions:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+:3000/api/goals:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+:3000/api/tasks:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+2intercept-console-error.ts:40 react-beautiful-dndA setup problem was encountered.> Invariant failed: isDropDisabled must be a boolean👷‍ This is a development only message. It will be removed in production builds.
+error @ intercept-console-error.ts:40Understand this error
+turbopack-hot-reloader-common.ts:41 [Fast Refresh] rebuilding
+:3000/api/tasks:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+report-hmr-latency.ts:26 [Fast Refresh] done in 190ms
+:3000/api/goals:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+:3000/api/ai-suggestions:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+:3000/api/tasks:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+:3000/api/goals:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+:3000/api/ai-suggestions:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+providers.tsx:13 
+            
+            
+           GET http://localhost:3000/api/ai-suggestions 404 (Not Found)
+Providers.useState @ providers.tsx:13
+fetchFn @ query.ts:429
+run @ retryer.ts:153
+(anonymous) @ retryer.ts:199Understand this error
+providers.tsx:13 
+            
+            
+           GET http://localhost:3000/api/tasks 404 (Not Found)
+Providers.useState @ providers.tsx:13
+fetchFn @ query.ts:429
+run @ retryer.ts:153
+(anonymous) @ retryer.ts:199Understand this error
+providers.tsx:13 
+            
+            
+           GET http://localhost:3000/api/goals 404 (Not Found)
+Providers.useState @ providers.tsx:13
+fetchFn @ query.ts:429
+run @ retryer.ts:153
+(anonymous) @ retryer.ts:199Understand this error
+providers.tsx:13 
+            
+            
+           GET http://localhost:3000/api/ai-suggestions 404 (Not Found)
+Providers.useState @ providers.tsx:13
+fetchFn @ query.ts:429
+run @ retryer.ts:153
+(anonymous) @ retryer.ts:199
+Promise.then
+(anonymous) @ retryer.ts:195
+Promise.catch
+run @ retryer.ts:160
+(anonymous) @ retryer.ts:199Understand this error
+providers.tsx:13 
+            
+            
+           GET http://localhost:3000/api/tasks 404 (Not Found)
+Providers.useState @ providers.tsx:13
+fetchFn @ query.ts:429
+run @ retryer.ts:153
+(anonymous) @ retryer.ts:199
+Promise.then
+(anonymous) @ retryer.ts:195
+Promise.catch
+run @ retryer.ts:160
+(anonymous) @ retryer.ts:199Understand this error
+intercept-console-error.ts:40 react-beautiful-dndA setup problem was encountered.> Invariant failed: isDropDisabled must be a boolean👷‍ This is a development only message. It will be removed in production builds.
