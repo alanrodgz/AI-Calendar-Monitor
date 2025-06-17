@@ -30,7 +30,7 @@ export default function AiChatModal({ isOpen, onClose }: AiChatModalProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      content: "I've analyzed your goals and current schedule. I can help you optimize your time blocks or answer questions about your productivity patterns. What would you like to know?",
+      content: "I can help you manage your calendar and create tasks automatically! Ask me to 'Create a weekly workout plan' or 'Schedule my morning routine' and I'll add actual events to your calendar. I can also answer questions about productivity and time management.",
       isAi: true,
       timestamp: new Date(Date.now() - 2 * 60 * 1000), // 2 minutes ago
     }
@@ -50,7 +50,11 @@ export default function AiChatModal({ isOpen, onClose }: AiChatModalProps) {
 
   const chatMutation = useMutation({
     mutationFn: async (message: string) => {
-      const response = await apiRequest("POST", "/api/ai/chat", { message });
+      const response = await apiRequest("POST", "/api/ai/chat", { 
+        message,
+        goals,
+        tasks
+      });
       return response.json();
     },
     onSuccess: (data) => {
@@ -61,6 +65,15 @@ export default function AiChatModal({ isOpen, onClose }: AiChatModalProps) {
         timestamp: new Date(),
       };
       setMessages(prev => [...prev, aiMessage]);
+      
+      // If tasks were created, refresh the calendar data
+      if (data.action === 'create_tasks' || data.action === 'create_goal') {
+        // Invalidate queries to refresh the calendar
+        import("@/lib/queryClient").then(({ queryClient }) => {
+          queryClient.invalidateQueries({ queryKey: ["/api/tasks"] });
+          queryClient.invalidateQueries({ queryKey: ["/api/goals"] });
+        });
+      }
     },
     onError: () => {
       toast({
@@ -94,9 +107,9 @@ export default function AiChatModal({ isOpen, onClose }: AiChatModalProps) {
   };
 
   const suggestedPrompts = [
-    "When should I schedule my workout this week?",
-    "Help me break down my product launch goal",
-    "What's the best time for focused work today?",
+    "Create a weekly workout plan",
+    "Schedule my morning routine for next week", 
+    "Plan my study sessions for learning Spanish",
   ];
 
   const handleSuggestedPrompt = (prompt: string) => {
@@ -123,8 +136,8 @@ export default function AiChatModal({ isOpen, onClose }: AiChatModalProps) {
                 <Brain className="text-white w-5 h-5" />
               </div>
               <div>
-                <DialogTitle>AI Assistant</DialogTitle>
-                <p id="ai-chat-description" className="text-sm text-gray-600">Ready to help optimize your schedule</p>
+                <DialogTitle className="text-gray-900 dark:text-gray-100">AI Assistant</DialogTitle>
+                <p id="ai-chat-description" className="text-sm text-gray-600 dark:text-gray-400">Ready to help optimize your schedule</p>
               </div>
             </div>
             <Button
@@ -152,11 +165,11 @@ export default function AiChatModal({ isOpen, onClose }: AiChatModalProps) {
                   <div
                     className={`rounded-2xl p-3 ${
                       message.isAi
-                        ? 'bg-gray-100 rounded-tl-md'
+                        ? 'bg-gray-100 dark:bg-gray-800 rounded-tl-md'
                         : 'bg-blue-600 text-white ml-8 rounded-tr-md'
                     }`}
                   >
-                    <p className="text-sm">{message.content}</p>
+                    <p className={`text-sm ${message.isAi ? 'text-gray-900 dark:text-gray-100' : 'text-white'}`}>{message.content}</p>
                   </div>
                   <div className="text-xs text-gray-500 mt-1">
                     {message.timestamp.toLocaleTimeString('en-US', {
@@ -174,11 +187,11 @@ export default function AiChatModal({ isOpen, onClose }: AiChatModalProps) {
                   <Brain className="text-white w-4 h-4" />
                 </div>
                 <div className="flex-1">
-                  <div className="bg-gray-100 rounded-2xl rounded-tl-md p-3">
+                  <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl rounded-tl-md p-3">
                     <div className="flex space-x-1">
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                      <div className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce"></div>
+                      <div className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                      <div className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                     </div>
                   </div>
                 </div>

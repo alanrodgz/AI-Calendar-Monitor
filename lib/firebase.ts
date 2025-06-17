@@ -17,6 +17,9 @@ export const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 provider.addScope('email');
 provider.addScope('profile');
+// Add Google Calendar access for full calendar integration
+provider.addScope('https://www.googleapis.com/auth/calendar');
+provider.addScope('https://www.googleapis.com/auth/calendar.events');
 
 export const signInWithGoogle = async () => {
   try {
