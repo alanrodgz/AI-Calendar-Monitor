@@ -1,59 +1,55 @@
-import { pgTable, text, serial, integer, boolean, timestamp, jsonb } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
-export const goals = pgTable("goals", {
-  id: serial("id").primaryKey(),
-  title: text("title").notNull(),
-  description: text("description").notNull(),
-  priority: text("priority").notNull().default("medium"), // high, medium, low
-  progress: integer("progress").notNull().default(0), // 0-100
-  dueDate: timestamp("due_date"),
-  isCompleted: boolean("is_completed").notNull().default(false),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
+// Goal schema
+export const insertGoalSchema = z.object({
+  title: z.string().min(1, "Title is required"),
+  description: z.string().optional(),
+  priority: z.enum(["low", "medium", "high"]).default("medium"),
+  progress: z.number().min(0).max(100).default(0),
+  dueDate: z.date().nullable().optional(),
+  isCompleted: z.boolean().default(false),
 });
 
-export const tasks = pgTable("tasks", {
-  id: serial("id").primaryKey(),
-  title: text("title").notNull(),
-  description: text("description"),
-  goalId: integer("goal_id").references(() => goals.id),
-  startTime: timestamp("start_time").notNull(),
-  endTime: timestamp("end_time").notNull(),
-  duration: integer("duration").notNull(), // in minutes
-  priority: text("priority").notNull().default("medium"), // high, medium, low
-  isCompleted: boolean("is_completed").notNull().default(false),
-  isAiGenerated: boolean("is_ai_generated").notNull().default(false),
-  color: text("color").notNull().default("#6366F1"),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
+export const goalSchema = insertGoalSchema.extend({
+  id: z.number(),
+  createdAt: z.date(),
 });
 
-export const aiSuggestions = pgTable("ai_suggestions", {
-  id: serial("id").primaryKey(),
-  content: text("content").notNull(),
-  type: text("type").notNull(), // scheduling, optimization, goal_breakdown
-  isRead: boolean("is_read").notNull().default(false),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
+// Task schema
+export const insertTaskSchema = z.object({
+  title: z.string().min(1, "Title is required"),
+  description: z.string().optional(),
+  goalId: z.number().nullable().optional(),
+  startTime: z.date(),
+  endTime: z.date(),
+  duration: z.number().min(1, "Duration must be at least 1 minute"),
+  priority: z.enum(["low", "medium", "high"]).default("medium"),
+  isCompleted: z.boolean().default(false),
+  isAiGenerated: z.boolean().default(false),
+  color: z.string().optional(),
 });
 
-export const insertGoalSchema = createInsertSchema(goals).omit({
-  id: true,
-  createdAt: true,
+export const taskSchema = insertTaskSchema.extend({
+  id: z.number(),
+  createdAt: z.date(),
 });
 
-export const insertTaskSchema = createInsertSchema(tasks).omit({
-  id: true,
-  createdAt: true,
+// AI Suggestion schema
+export const insertAiSuggestionSchema = z.object({
+  content: z.string().min(1, "Content is required"),
+  type: z.enum(["scheduling", "optimization", "reminder"]).default("scheduling"),
+  isRead: z.boolean().default(false),
 });
 
-export const insertAiSuggestionSchema = createInsertSchema(aiSuggestions).omit({
-  id: true,
-  createdAt: true,
+export const aiSuggestionSchema = insertAiSuggestionSchema.extend({
+  id: z.number(),
+  createdAt: z.date(),
 });
 
+// Types
 export type InsertGoal = z.infer<typeof insertGoalSchema>;
-export type Goal = typeof goals.$inferSelect;
+export type Goal = z.infer<typeof goalSchema>;
 export type InsertTask = z.infer<typeof insertTaskSchema>;
-export type Task = typeof tasks.$inferSelect;
+export type Task = z.infer<typeof taskSchema>;
 export type InsertAiSuggestion = z.infer<typeof insertAiSuggestionSchema>;
-export type AiSuggestion = typeof aiSuggestions.$inferSelect;
+export type AiSuggestion = z.infer<typeof aiSuggestionSchema>;
