@@ -11,7 +11,8 @@ The application follows a full-stack monorepo architecture with clear separation
 - **Frontend**: React 18 with TypeScript, built using Vite
 - **Backend**: Node.js with Express server
 - **Database**: PostgreSQL with Drizzle ORM
-- **AI Integration**: OpenAI GPT-4o for intelligent task generation and scheduling optimization
+- **Authentication**: Firebase Authentication with Google OAuth
+- **AI Integration**: OpenAI GPT-3.5-turbo for intelligent task generation and scheduling optimization
 - **UI Framework**: Tailwind CSS with Radix UI components (shadcn/ui)
 - **State Management**: TanStack Query for server state management
 - **Routing**: Wouter for client-side routing
@@ -40,19 +41,22 @@ The application uses three main entities:
 
 ## Data Flow
 
-1. **Goal Creation**: Users create goals through the sidebar interface
-2. **Task Management**: Tasks can be manually created or AI-generated from goals
-3. **Schedule Optimization**: AI analyzes existing tasks and goals to suggest optimizations
-4. **Real-time Updates**: Frontend updates reactively through TanStack Query invalidation
-5. **Drag-and-Drop**: Calendar interface supports task repositioning (with react-beautiful-dnd)
+1. **Authentication**: Users sign in via Google OAuth through Firebase
+2. **Goal Creation**: Authenticated users create goals through the sidebar interface
+3. **Task Management**: Tasks can be manually created or AI-generated from goals
+4. **Schedule Optimization**: AI analyzes existing tasks and goals to suggest optimizations
+5. **Real-time Updates**: Frontend updates reactively through TanStack Query invalidation
+6. **Drag-and-Drop**: Calendar interface supports task repositioning (with react-beautiful-dnd)
 
 ## External Dependencies
 
 ### Core Dependencies
 - **Database**: Neon Database (PostgreSQL) via `@neondatabase/serverless`
+- **Authentication**: Firebase SDK for Google OAuth integration
 - **AI Service**: OpenAI API for task generation and optimization
 - **UI Components**: Extensive use of Radix UI primitives
 - **Styling**: Tailwind CSS with class-variance-authority for component variants
+- **Drag & Drop**: react-beautiful-dnd for calendar task repositioning
 
 ### Development Tools
 - **Build System**: Vite with TypeScript and React plugins
@@ -73,11 +77,13 @@ The deployment uses Replit's autoscale deployment target with build and run comm
 
 ## Recent Changes
 
+- ✓ Added Firebase Authentication with Google OAuth integration
+- ✓ Created modern landing page with feature showcase
+- ✓ Implemented authentication-protected calendar access
+- ✓ Added user profile display and sign-out functionality
 - ✓ Fixed OpenAI API integration to use gpt-3.5-turbo model
-- ✓ Resolved AI chat functionality with proper error handling  
-- ✓ Fixed accessibility warning in dialog components
+- ✓ Resolved AI chat functionality with proper error handling
 - ✓ Updated storage layer with proper TypeScript types
-- ✓ AI chat assistant now responding correctly to user queries
 
 ## Changelog
 

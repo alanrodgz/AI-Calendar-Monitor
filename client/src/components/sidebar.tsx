@@ -1,14 +1,21 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Plus, Brain, Lightbulb } from "lucide-react";
+import { Plus, Brain, Lightbulb, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { signOutUser } from "@/lib/firebase";
+import { useAuth } from "@/hooks/useAuth";
 import GoalCard from "./goal-card";
 import AddGoalDialog from "./add-goal-dialog";
 import type { Goal, AiSuggestion } from "@shared/schema";
 
 export default function Sidebar() {
   const [isAddGoalOpen, setIsAddGoalOpen] = useState(false);
+  const { user } = useAuth();
+
+  const handleSignOut = () => {
+    signOutUser();
+  };
 
   const { data: goals = [], isLoading: goalsLoading } = useQuery<Goal[]>({
     queryKey: ["/api/goals"],
@@ -24,12 +31,40 @@ export default function Sidebar() {
     <div className="w-80 bg-white border-r border-gray-200 flex flex-col">
       {/* Header */}
       <div className="p-6 border-b border-gray-100">
-        <div className="flex items-center space-x-3 mb-4">
-          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-            <Brain className="text-white w-4 h-4" />
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center space-x-3">
+            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+              <Brain className="text-white w-4 h-4" />
+            </div>
+            <h1 className="text-xl font-semibold text-gray-900">Motion AI</h1>
           </div>
-          <h1 className="text-xl font-semibold text-gray-900">Motion AI</h1>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleSignOut}
+            className="p-2 h-8 w-8"
+          >
+            <LogOut className="w-4 h-4" />
+          </Button>
         </div>
+        
+        {/* User Info */}
+        {user && (
+          <div className="flex items-center space-x-3 mb-3">
+            {user.photoURL && (
+              <img 
+                src={user.photoURL} 
+                alt="Profile" 
+                className="w-8 h-8 rounded-full"
+              />
+            )}
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-gray-900 truncate">
+                {user.displayName || user.email}
+              </p>
+            </div>
+          </div>
+        )}
         
         {/* AI Status */}
         <div className="flex items-center space-x-2 text-sm">
