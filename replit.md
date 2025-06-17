@@ -71,9 +71,17 @@ The application is configured for Replit deployment with:
 
 The deployment uses Replit's autoscale deployment target with build and run commands configured in `.replit` file.
 
+## Recent Changes
+
+- ✓ Fixed OpenAI API integration to use gpt-3.5-turbo model
+- ✓ Resolved AI chat functionality with proper error handling  
+- ✓ Fixed accessibility warning in dialog components
+- ✓ Updated storage layer with proper TypeScript types
+- ✓ AI chat assistant now responding correctly to user queries
+
 ## Changelog
 
-- June 17, 2025. Initial setup
+- June 17, 2025: Initial Motion AI calendar setup with full AI integration
 
 ## User Preferences
 

@@ -68,7 +68,7 @@ Respond with JSON in this format:
 `;
 
     const response = await openai.chat.completions.create({
-      model: "gpt-4o",
+      model: "gpt-3.5-turbo",
       messages: [
         {
           role: "system",
@@ -129,7 +129,7 @@ Note: Do not include startTime and endTime - these will be scheduled separately.
 `;
 
     const response = await openai.chat.completions.create({
-      model: "gpt-4o",
+      model: "gpt-3.5-turbo",
       messages: [
         {
           role: "system",
@@ -177,7 +177,7 @@ ${context.tasks.map(task => `- ${task.title}: ${new Date(task.startTime).toLocal
 
     console.log('Making OpenAI API request for chat...');
     const response = await openai.chat.completions.create({
-      model: "gpt-4o",
+      model: "gpt-3.5-turbo",
       messages: [
         {
           role: "system",
@@ -196,7 +196,7 @@ ${contextString}`
 
     console.log('OpenAI API response received successfully');
     return response.choices[0].message.content || "I'm sorry, I couldn't process your request right now.";
-  } catch (error) {
+  } catch (error: any) {
     console.error('OpenAI API error details:', error);
     if (error.code === 'invalid_api_key') {
       return "The OpenAI API key appears to be invalid. Please check your API key configuration.";
@@ -204,6 +204,9 @@ ${contextString}`
     if (error.code === 'insufficient_quota') {
       return "The OpenAI API quota has been exceeded. Please check your OpenAI account billing.";
     }
-    return `I'm experiencing technical difficulties: ${error.message}. Please try again later.`;
+    if (error.code === 'model_not_found') {
+      return "The requested AI model is not available. Please check your OpenAI account plan.";
+    }
+    return `I'm experiencing technical difficulties: ${error.message || 'Unknown error'}. Please try again later.`;
   }
 }
