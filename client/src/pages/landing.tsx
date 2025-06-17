@@ -1,11 +1,32 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Brain, Calendar, Clock, Target, Zap, CheckCircle, ArrowRight } from "lucide-react";
+import { Brain, Calendar, Clock, Target, Zap, CheckCircle, ArrowRight, AlertCircle } from "lucide-react";
 import { signInWithGoogle } from "@/lib/firebase";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Landing() {
-  const handleSignIn = () => {
-    signInWithGoogle();
+  const [isSigningIn, setIsSigningIn] = useState(false);
+  const { toast } = useToast();
+
+  const handleSignIn = async () => {
+    setIsSigningIn(true);
+    try {
+      await signInWithGoogle();
+      toast({
+        title: "Welcome to Motion AI!",
+        description: "You've successfully signed in.",
+      });
+    } catch (error: any) {
+      console.error('Sign in error:', error);
+      toast({
+        title: "Sign In Failed",
+        description: error.message || "Failed to sign in. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSigningIn(false);
+    }
   };
 
   const features = [
@@ -52,9 +73,10 @@ export default function Landing() {
           </div>
           <Button 
             onClick={handleSignIn}
+            disabled={isSigningIn}
             className="bg-blue-600 hover:bg-blue-700 text-white px-6"
           >
-            Sign In
+            {isSigningIn ? "Signing In..." : "Sign In"}
           </Button>
         </div>
       </header>
@@ -80,11 +102,12 @@ export default function Landing() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button 
               onClick={handleSignIn}
+              disabled={isSigningIn}
               size="lg"
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 text-lg group"
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 text-lg group disabled:opacity-50"
             >
-              Get Started Free
-              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              {isSigningIn ? "Signing In..." : "Get Started Free"}
+              {!isSigningIn && <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />}
             </Button>
             <p className="text-sm text-gray-500">No credit card required • 30-day free trial</p>
           </div>
@@ -145,10 +168,11 @@ export default function Landing() {
                 <h4 className="text-xl font-semibold mb-4">Ready to Get Started?</h4>
                 <Button 
                   onClick={handleSignIn}
+                  disabled={isSigningIn}
                   size="lg"
-                  className="bg-white text-blue-600 hover:bg-gray-100 px-8"
+                  className="bg-white text-blue-600 hover:bg-gray-100 px-8 disabled:opacity-50"
                 >
-                  Start Your Free Trial
+                  {isSigningIn ? "Signing In..." : "Start Your Free Trial"}
                 </Button>
               </div>
             </div>

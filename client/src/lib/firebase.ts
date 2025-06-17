@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithRedirect, GoogleAuthProvider, signOut, User } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, User } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDo-mzP6rvAIPZ0vR3dWW1aD0VszVwUiWo",
@@ -15,9 +15,20 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
 const provider = new GoogleAuthProvider();
+provider.addScope('email');
+provider.addScope('profile');
 
-export const signInWithGoogle = () => {
-  return signInWithRedirect(auth, provider);
+export const signInWithGoogle = async () => {
+  try {
+    const result = await signInWithPopup(auth, provider);
+    return result;
+  } catch (error: any) {
+    console.error('Firebase authentication error:', error);
+    if (error.code === 'auth/unauthorized-domain') {
+      throw new Error('This domain is not authorized for Firebase authentication. Please add the current domain to Firebase authorized domains.');
+    }
+    throw error;
+  }
 };
 
 export const signOutUser = () => {
