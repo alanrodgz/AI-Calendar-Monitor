@@ -29,7 +29,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
-import { insertGoalSchema } from "@shared/schema";
+import { insertGoalSchema } from "@/shared/schema";
 
 const formSchema = insertGoalSchema.extend({
   dueDate: z.string().optional(),

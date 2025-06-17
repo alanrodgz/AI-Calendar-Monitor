@@ -2,20 +2,19 @@
 
 ## Overview
 
-Motion AI is a productivity calendar application that combines AI-powered task management with intelligent scheduling optimization. The app allows users to create goals, manage tasks, and receive AI-generated suggestions for optimal time management. It features a modern React frontend with a Node.js/Express backend, utilizing PostgreSQL for data persistence and OpenAI for intelligent automation.
+Motion AI is a productivity calendar application that combines AI-powered task management with intelligent scheduling optimization. The app allows users to create goals, manage tasks, and receive AI-generated suggestions for optimal time management. It features a modern Next.js application with TypeScript, Tailwind CSS, and Firebase authentication.
 
 ## System Architecture
 
-The application follows a full-stack monorepo architecture with clear separation between client and server:
+The application follows a Next.js App Router architecture with full-stack capabilities:
 
-- **Frontend**: React 18 with TypeScript, built using Vite
-- **Backend**: Node.js with Express server
-- **Database**: PostgreSQL with Drizzle ORM
+- **Framework**: Next.js 15 with TypeScript and App Router
+- **Build Tool**: Turbopack for fast development builds
 - **Authentication**: Firebase Authentication with Google OAuth
 - **AI Integration**: OpenAI GPT-3.5-turbo for intelligent task generation and scheduling optimization
 - **UI Framework**: Tailwind CSS with Radix UI components (shadcn/ui)
 - **State Management**: TanStack Query for server state management
-- **Routing**: Wouter for client-side routing
+- **API Routes**: Next.js API routes for backend functionality
 
 ## Key Components
 
@@ -27,11 +26,10 @@ The application follows a full-stack monorepo architecture with clear separation
 - **Build Tool**: Vite with TypeScript support
 
 ### Backend Architecture
-- **API Layer**: RESTful Express.js server with route-based organization
-- **Data Layer**: Drizzle ORM with PostgreSQL database
-- **Storage Interface**: Abstracted storage layer with in-memory fallback for development
+- **API Layer**: Next.js API routes with RESTful design
+- **Data Layer**: Mock data for development with Zod schema validation
 - **AI Services**: OpenAI integration for task generation and schedule optimization
-- **Middleware**: Request logging, error handling, and JSON parsing
+- **Middleware**: Built-in Next.js middleware and error handling
 
 ### Database Schema
 The application uses three main entities:
@@ -77,17 +75,18 @@ The deployment uses Replit's autoscale deployment target with build and run comm
 
 ## Recent Changes
 
-- ✓ Added Firebase Authentication with Google OAuth integration
-- ✓ Created modern landing page with feature showcase
-- ✓ Implemented authentication-protected calendar access
-- ✓ Added user profile display and sign-out functionality
-- ✓ Fixed OpenAI API integration to use gpt-3.5-turbo model
-- ✓ Resolved AI chat functionality with proper error handling
-- ✓ Updated storage layer with proper TypeScript types
+- ✓ Converted from React/Vite to Next.js 15 with App Router
+- ✓ Updated to use Turbopack for fast development builds
+- ✓ Migrated all components to Next.js structure
+- ✓ Fixed Firebase Authentication with Google OAuth integration
+- ✓ Created Next.js API routes for goals, tasks, AI suggestions, and chat
+- ✓ Updated all import paths to use Next.js @ alias convention
+- ✓ Configured TypeScript, ESLint, and Tailwind CSS for Next.js
+- ✓ Maintained OpenAI GPT-3.5-turbo integration for AI functionality
 
 ## Changelog
 
-- June 17, 2025: Initial Motion AI calendar setup with full AI integration
+- June 17, 2025: Converted Motion AI calendar to Next.js architecture with TypeScript, ESLint, Tailwind CSS, App Router, and Turbopack
 
 ## User Preferences
 
